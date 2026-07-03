@@ -1,44 +1,85 @@
 # Hypothesis Frontier
 
-Date: 2026-07-03
+Date: 2026-07-03 (second iteration)
 
 ## Lean `sorry` count
 
-`main`: 0
-
-No `axiom` declarations are present.
+`main`: 0. No `axiom` declarations.
+Statement-first obligations live on `frontier/M1` under
+`LeanTransferMatrix/Frontier/` and are listed below.
 
 ## Explicit hypotheses currently carried
 
-The public interface packages the following hypotheses in `TransferOperatorInterface`:
+`TransferOperatorInterface` still packages, for a GENERIC model:
 
 * `gapToClusteringHypothesis : HasStrictSpectralGap data -> HasExponentialClustering data`
 * `clusteringToGapHypothesis : HasUniformExponentialClustering data -> HasStrictSpectralGap data`
 
-These are not asserted globally. They must be supplied by whichever construction identifies a concrete finite transfer operator and proves the relevant spectral/correlation estimates.
+NEW: on the ferromagnetic zero-field Ising chain (`0 ≤ β`) both hypotheses
+are now THEOREMS, and `Ising1D.isingInterface` is the first fully
+unconditional instance of the interface. The generic hypotheses remain only
+for models whose Perron-Frobenius input has not been proved.
+
+## Closed facts on `main`
+
+M0 layer (previous iteration): eigenvectors and eigenvalues of the symmetric
+2x2 transfer matrix; correlation as spectral-ratio power.
+
+Quantitative gap layer (`Ising1DGap.lean`):
+
+* `isingLambdaPlus_pos`, `isingLambdaMinus_nonneg`,
+  `isingLambdaMinus_lt_isingLambdaPlus`, `abs_isingLambdaMinus_lt`:
+  the two-sided strict gap `|λ₋| < λ₊`, for every real coupling.
+* `isingSpectralRatio_{nonneg, lt_one}`, `abs_isingSpectralRatio_lt_one`,
+  `isingSpectralRatio_eq_tanh`: the ratio is `tanh β`, strictly inside the
+  unit interval.
+* `isingTransferData_hasStrictSpectralGap`,
+  `isingTransferData_hasExponentialClustering` (amplitude one, exact ratio),
+  `isingTransferData_hasUniformExponentialClustering`.
+* `isingInterface`: `TransferOperatorInterface` instantiated with ZERO
+  carried hypotheses.
+
+Rate layer (`RateGlue.lean`):
+
+* `FiniteTransferData.spectralRatio_{nonneg, lt_one}`.
+* `FiniteTransferData.exponentialRate_pos`: the rate `-log (λ₂/λ₁)` is a
+  genuine positive mass gap.
+* `FiniteTransferData.spectralRatio_pow_eq_exp`,
+  `FiniteTransferData.clustering_exp_form`: clustering in the
+  `amplitude * exp (-rate * n)` form consumed by the parent M3 assembly.
+
+Matrix algebra layer (`Matrix2Algebra.lean`):
+
+* `Matrix2.{ext, mul, one, pow, trace}`.
+* `transferMatrix_pow`: exact spectral closed form of `T^n` by induction.
+* `trace_transferMatrix_pow`: `Z_n = λ₊^n + λ₋^n`.
+* `transferMatrix_pow_mulVec_{plus, minus}`: eigenrelations for all powers.
+
+## Frontier obligations (branch `frontier/M1`, statement-first, sorried)
+
+`Frontier/PerronFrobenius.lean` (candidate for upstream Mathlib):
+
+* `exists_perron_pair`, `eigenvalue_le_perron`,
+  `eigenvalue_lt_perron_of_orthogonal`, `centered_power_bound` (constants
+  still existential — MUST become explicit before feeding
+  `FiniteTransferData.amplitude`).
+
+`Frontier/GibbsChain.lean` (closes the T0 honesty gap: Gibbs measure from
+first principles):
+
+* `gibbsPartition_eq_trace`, `gibbsTwoPoint_eq`, `gibbsCorrelation_tendsto`
+  (retroactive justification of `isingTwoPointCorrelation`).
 
 ## Honest distance to the programme target
 
-Closed now:
-
-* M0 algebra for the zero-field 1D Ising 2x2 transfer matrix.
-* A compilable parent-facing interface for the pair `gap <-> clustering`, with all missing mathematics exposed as parameters.
-
-Still missing:
-
-* Perron-Frobenius theorem strong enough for primitive nonnegative self-adjoint finite matrices.
-* Spectral decomposition estimate on the centered two-point sector with exact rate `-log (lambda2 / lambda1)`.
-* Reverse implication from uniform clustering to a gap lower bound in the finite framework.
-* Discrete Gaussian chain transfer-operator model.
-* Any gauge-field transfer-operator construction.
-* Reflection positivity and OS reconstruction, deliberately out of scope here.
-* Balaban `hRpoly`/`hg` and Kotecky-Preiss hypotheses, deliberately out of scope here.
+The dictionary gap <-> clustering is now unconditional on one real model with
+exact constants (C = 1, ρ = tanh β, rate = -log tanh β). What separates this
+satellite from serving an arbitrary strictly positive transfer kernel is
+exactly the Perron-Frobenius block above. Gaussian chain (M3) not started.
+Reflection positivity, OS reconstruction, and all Balaban/KP hypotheses
+remain deliberately out of scope here.
 
 ## Frontier branch policy
 
-Statements-first work with `sorry` should happen on branches named `frontier/*`.
-Every such branch must update this file with:
-
-* exact theorem names containing `sorry`;
-* every explicit hypothesis introduced;
-* whether the statement is intended for upstream Mathlib.
+Unchanged: statements-first work with `sorry` only on `frontier/*` branches,
+each updating this file with exact sorried names.
