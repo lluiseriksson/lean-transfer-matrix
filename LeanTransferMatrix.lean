@@ -1,3 +1,6 @@
 import LeanTransferMatrix.Finite
 import LeanTransferMatrix.Interfaces
 import LeanTransferMatrix.Ising1D
+import LeanTransferMatrix.Matrix2Algebra
+import LeanTransferMatrix.Ising1DGap
+import LeanTransferMatrix.RateGlue
