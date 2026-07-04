@@ -33,6 +33,13 @@ def spinValue : Spin → ℝ
   | Spin.up => 1
   | Spin.down => -1
 
+/-- Matrix entry, indexed by the two spin states. -/
+def Matrix2.entry (M : Matrix2) : Spin → Spin → ℝ
+  | Spin.up, Spin.up => M.upUp
+  | Spin.up, Spin.down => M.upDown
+  | Spin.down, Spin.up => M.downUp
+  | Spin.down, Spin.down => M.downDown
+
 /-- Partition function of the periodic chain of length `n + 1`, summed over
 all configurations: the first-principles object. -/
 noncomputable def gibbsPartition (β : ℝ) (n : ℕ) : ℝ :=
@@ -67,6 +74,14 @@ theorem pairWeight_comm (β : ℝ) (s t : Spin) :
 @[simp] theorem spinValue_mul_self (s : Spin) :
     spinValue s * spinValue s = 1 := by
   cases s <;> simp [spinValue]
+
+/-- Local Boltzmann weights are exactly the corresponding entries of the
+zero-field Ising transfer matrix. -/
+theorem pairWeight_eq_isingTransferMatrix_entry (β : ℝ) (s t : Spin) :
+    pairWeight β s t = (isingTransferMatrix β).entry s t := by
+  cases s <;> cases t <;>
+    simp [pairWeight, Matrix2.entry, isingTransferMatrix, transferMatrix,
+      alignedWeight, antiAlignedWeight]
 
 /-- The configuration sum equals the transfer-matrix trace:
 `Z_{n+1} = tr (T^{n+1}) = λ₊^{n+1} + λ₋^{n+1}`. -/
