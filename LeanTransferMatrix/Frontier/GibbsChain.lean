@@ -44,6 +44,30 @@ noncomputable def gibbsTwoPoint (β : ℝ) (n k : ℕ) : ℝ :=
     spinValue (σ 0) * spinValue (σ (Fin.ofNat (n + 1) k))
       * ∏ i : Fin (n + 1), pairWeight β (σ i) (σ (i + 1))
 
+/-- Equal neighbouring spins contribute the aligned Boltzmann weight. -/
+@[simp] theorem pairWeight_self (β : ℝ) (s : Spin) :
+    pairWeight β s s = Real.exp β := by
+  simp [pairWeight]
+
+/-- Unequal neighbouring spins contribute the anti-aligned Boltzmann weight. -/
+theorem pairWeight_of_ne {β : ℝ} {s t : Spin} (hst : s ≠ t) :
+    pairWeight β s t = Real.exp (-β) := by
+  simp [pairWeight, hst]
+
+/-- The nearest-neighbour weight is symmetric in the two spins. -/
+theorem pairWeight_comm (β : ℝ) (s t : Spin) :
+    pairWeight β s t = pairWeight β t s := by
+  by_cases h : s = t
+  · subst h
+    simp
+  · have ht : t ≠ s := fun hts => h hts.symm
+    simp [pairWeight_of_ne h, pairWeight_of_ne ht]
+
+/-- The spin observable squares to one. -/
+@[simp] theorem spinValue_mul_self (s : Spin) :
+    spinValue s * spinValue s = 1 := by
+  cases s <;> simp [spinValue]
+
 /-- The configuration sum equals the transfer-matrix trace:
 `Z_{n+1} = tr (T^{n+1}) = λ₊^{n+1} + λ₋^{n+1}`. -/
 theorem gibbsPartition_eq_trace (β : ℝ) (n : ℕ) :
