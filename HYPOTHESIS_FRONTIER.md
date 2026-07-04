@@ -69,7 +69,9 @@ first principles):
 
 * `gibbsPartition_eq_trace`, `gibbsTwoPoint_eq`, `gibbsCorrelation_tendsto`
   (retroactive justification of `isingTwoPointCorrelation`).
-* Closed local helpers now include `Matrix2.entry`,
+* Closed local helpers now include `Spin.univ_eq`, `Matrix2.entry`,
+  `Matrix2.mul_entry`, `Matrix2.pow_succ_entry`,
+  `Matrix2.trace_eq_entry_sum`,
   `pairWeight_eq_isingTransferMatrix_entry`,
   `pairWeight_product_eq_transferMatrix_entry_product`,
   `gibbsPartition_eq_transferMatrix_entry_sum`,

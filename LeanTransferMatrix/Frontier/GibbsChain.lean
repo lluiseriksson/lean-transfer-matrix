@@ -24,6 +24,11 @@ namespace Ising1D
 instance : Fintype Spin :=
   ⟨{Spin.up, Spin.down}, by intro s; cases s <;> simp⟩
 
+/-- The explicit finite universe of the two spin states. -/
+theorem Spin.univ_eq : (Finset.univ : Finset Spin) = {Spin.up, Spin.down} := by
+  ext s
+  cases s <;> simp
+
 /-- Boltzmann pair weight. -/
 noncomputable def pairWeight (β : ℝ) (s t : Spin) : ℝ :=
   if s = t then Real.exp β else Real.exp (-β)
@@ -39,6 +44,23 @@ def Matrix2.entry (M : Matrix2) : Spin → Spin → ℝ
   | Spin.up, Spin.down => M.upDown
   | Spin.down, Spin.up => M.downUp
   | Spin.down, Spin.down => M.downDown
+
+/-- Entrywise form of concrete `2 x 2` matrix multiplication. -/
+theorem Matrix2.mul_entry (M N : Matrix2) (s t : Spin) :
+    (M.mul N).entry s t = ∑ u : Spin, M.entry s u * N.entry u t := by
+  cases s <;> cases t <;>
+    simp [Matrix2.mul, Matrix2.entry, Spin.univ_eq]
+
+/-- Entrywise form of the recursive power step. -/
+theorem Matrix2.pow_succ_entry (M : Matrix2) (n : ℕ) (s t : Spin) :
+    (M.pow (n + 1)).entry s t = ∑ u : Spin, (M.pow n).entry s u * M.entry u t := by
+  simp [Matrix2.pow, Matrix2.mul_entry]
+
+/-- Trace as the sum over diagonal entries, in the `Spin` indexing used by
+the Gibbs configuration sum. -/
+theorem Matrix2.trace_eq_entry_sum (M : Matrix2) :
+    M.trace = ∑ s : Spin, M.entry s s := by
+  simp [Matrix2.trace, Matrix2.entry, Spin.univ_eq]
 
 /-- Partition function of the periodic chain of length `n + 1`, summed over
 all configurations: the first-principles object. -/
