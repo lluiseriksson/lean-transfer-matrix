@@ -70,7 +70,9 @@ first principles):
 * `gibbsPartition_eq_trace`, `gibbsTwoPoint_eq`, `gibbsCorrelation_tendsto`
   (retroactive justification of `isingTwoPointCorrelation`).
 * Closed local helpers now include `Matrix2.entry`,
-  `pairWeight_eq_isingTransferMatrix_entry`, `pairWeight_self`,
+  `pairWeight_eq_isingTransferMatrix_entry`,
+  `pairWeight_product_eq_transferMatrix_entry_product`,
+  `gibbsPartition_eq_transferMatrix_entry_sum`, `pairWeight_self`,
   `pairWeight_of_ne`, `pairWeight_comm`, and `spinValue_mul_self`.
 
 ## Honest distance to the programme target

@@ -83,6 +83,26 @@ theorem pairWeight_eq_isingTransferMatrix_entry (β : ℝ) (s t : Spin) :
     simp [pairWeight, Matrix2.entry, isingTransferMatrix, transferMatrix,
       alignedWeight, antiAlignedWeight]
 
+/-- The full periodic configuration weight is a product of transfer-matrix
+entries. -/
+theorem pairWeight_product_eq_transferMatrix_entry_product
+    (β : ℝ) (n : ℕ) (σ : Fin (n + 1) → Spin) :
+    (∏ i : Fin (n + 1), pairWeight β (σ i) (σ (i + 1)))
+      = ∏ i : Fin (n + 1),
+          (isingTransferMatrix β).entry (σ i) (σ (i + 1)) := by
+  apply Finset.prod_congr rfl
+  intro i _
+  exact pairWeight_eq_isingTransferMatrix_entry β (σ i) (σ (i + 1))
+
+/-- The first-principles partition function after the local transfer-entry
+rewrite, before proving that the configuration sum is the trace. -/
+theorem gibbsPartition_eq_transferMatrix_entry_sum (β : ℝ) (n : ℕ) :
+    gibbsPartition β n
+      = ∑ σ : Fin (n + 1) → Spin,
+          ∏ i : Fin (n + 1),
+            (isingTransferMatrix β).entry (σ i) (σ (i + 1)) := by
+  simp [gibbsPartition, pairWeight_eq_isingTransferMatrix_entry]
+
 /-- The configuration sum equals the transfer-matrix trace:
 `Z_{n+1} = tr (T^{n+1}) = λ₊^{n+1} + λ₋^{n+1}`. -/
 theorem gibbsPartition_eq_trace (β : ℝ) (n : ℕ) :
