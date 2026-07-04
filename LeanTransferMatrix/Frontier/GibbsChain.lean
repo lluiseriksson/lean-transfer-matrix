@@ -103,6 +103,14 @@ theorem gibbsPartition_eq_transferMatrix_entry_sum (β : ℝ) (n : ℕ) :
             (isingTransferMatrix β).entry (σ i) (σ (i + 1)) := by
   simp [gibbsPartition, pairWeight_eq_isingTransferMatrix_entry]
 
+/-- The closed trace formula specialized to the zero-field Ising transfer
+matrix, in the exact notation used by the Gibbs frontier. -/
+theorem trace_isingTransferMatrix_pow (β : ℝ) (n : ℕ) :
+    ((isingTransferMatrix β).pow n).trace
+      = isingLambdaPlus β ^ n + isingLambdaMinus β ^ n := by
+  simpa [isingTransferMatrix, isingLambdaPlus, isingLambdaMinus] using
+    trace_transferMatrix_pow (alignedWeight β) (antiAlignedWeight β) n
+
 /-- The configuration sum equals the transfer-matrix trace:
 `Z_{n+1} = tr (T^{n+1}) = λ₊^{n+1} + λ₋^{n+1}`. -/
 theorem gibbsPartition_eq_trace (β : ℝ) (n : ℕ) :
