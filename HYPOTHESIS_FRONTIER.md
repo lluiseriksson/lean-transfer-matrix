@@ -71,12 +71,13 @@ first principles):
   (retroactive justification of `isingTwoPointCorrelation`).
 * Closed local helpers now include `Spin.univ_eq`, `Matrix2.entry`,
   `Matrix2.mul_entry`, `Matrix2.pow_succ_entry`,
-  `Matrix2.trace_eq_entry_sum`,
+  `Matrix2.trace_eq_entry_sum`, `Matrix2.trace_pow_succ_eq_entry_sum`,
   `pairWeight_eq_isingTransferMatrix_entry`,
   `pairWeight_product_eq_transferMatrix_entry_product`,
   `gibbsPartition_eq_transferMatrix_entry_sum`,
-  `trace_isingTransferMatrix_pow`, `pairWeight_self`, `pairWeight_of_ne`,
-  `pairWeight_comm`, and `spinValue_mul_self`.
+  `trace_isingTransferMatrix_pow`,
+  `trace_isingTransferMatrix_pow_succ_eq_entry_sum`, `pairWeight_self`,
+  `pairWeight_of_ne`, `pairWeight_comm`, and `spinValue_mul_self`.
 
 ## Honest distance to the programme target
 

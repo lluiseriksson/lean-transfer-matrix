@@ -62,6 +62,17 @@ theorem Matrix2.trace_eq_entry_sum (M : Matrix2) :
     M.trace = ∑ s : Spin, M.entry s s := by
   simp [Matrix2.trace, Matrix2.entry, Spin.univ_eq]
 
+/-- One-step trace expansion: the diagonal trace of `M^(n+1)` is a sum over
+one intermediate spin. This is the local induction step needed for the
+configuration-sum-to-trace bridge. -/
+theorem Matrix2.trace_pow_succ_eq_entry_sum (M : Matrix2) (n : ℕ) :
+    (M.pow (n + 1)).trace
+      = ∑ s : Spin, ∑ t : Spin, (M.pow n).entry s t * M.entry t s := by
+  rw [Matrix2.trace_eq_entry_sum]
+  apply Finset.sum_congr rfl
+  intro s _
+  rw [Matrix2.pow_succ_entry]
+
 /-- Partition function of the periodic chain of length `n + 1`, summed over
 all configurations: the first-principles object. -/
 noncomputable def gibbsPartition (β : ℝ) (n : ℕ) : ℝ :=
@@ -132,6 +143,15 @@ theorem trace_isingTransferMatrix_pow (β : ℝ) (n : ℕ) :
       = isingLambdaPlus β ^ n + isingLambdaMinus β ^ n := by
   simpa [isingTransferMatrix, isingLambdaPlus, isingLambdaMinus] using
     trace_transferMatrix_pow (alignedWeight β) (antiAlignedWeight β) n
+
+/-- The one-step trace expansion in the exact transfer matrix used by the
+Gibbs frontier. -/
+theorem trace_isingTransferMatrix_pow_succ_eq_entry_sum (β : ℝ) (n : ℕ) :
+    ((isingTransferMatrix β).pow (n + 1)).trace
+      = ∑ s : Spin, ∑ t : Spin,
+          ((isingTransferMatrix β).pow n).entry s t
+            * (isingTransferMatrix β).entry t s := by
+  exact Matrix2.trace_pow_succ_eq_entry_sum (isingTransferMatrix β) n
 
 /-- The configuration sum equals the transfer-matrix trace:
 `Z_{n+1} = tr (T^{n+1}) = λ₊^{n+1} + λ₋^{n+1}`. -/
