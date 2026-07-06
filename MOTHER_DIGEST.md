@@ -60,6 +60,33 @@ Consumption pattern for the mother repo:
    `isingInterface`.
 3. Import `LeanTransferMatrix.RateGlue` when the consumer needs the
    `amplitude * exp (-rate * n)` form.
+4. Import `LeanTransferMatrix.FiniteWindowExtraction` when the consumer needs
+   the finite-window extraction guardrail contract from issue #9.
+
+## Finite-window guardrail contract
+
+File:
+
+* `LeanTransferMatrix/FiniteWindowExtraction.lean`
+
+Useful exact names:
+
+* `LeanTransferMatrix.FiniteWindowExtractionData`
+* `LeanTransferMatrix.FiniteWindowErrorBound`
+* `LeanTransferMatrix.FiniteWindowUpperBound`
+* `LeanTransferMatrix.InvertedRegimeLowerBound`
+* `LeanTransferMatrix.FiniteWindowExtractionHypotheses`
+* `LeanTransferMatrix.FiniteWindowExtractionHypotheses.hasStrictSpectralGap`
+* `LeanTransferMatrix.FiniteWindowExtractionHypotheses.hasFiniteWindowUpperBound`
+* `LeanTransferMatrix.FiniteWindowExtractionRejectsInvertedRegime`
+* `LeanTransferMatrix.finiteWindowExtractionRejectsInvertedRegime`
+
+The contract names the finite window
+`windowFloor <= windowSize < kappa / renormalizedMass`, positive transfer
+eigenvalues, strict spectral ratio, and an explicit nonnegative extraction
+error. The guardrail states only that an inverted lower-bound route
+`kappa / renormalizedMass < windowSize` is incompatible with the finite upper
+window; it does not prove a source construction or a mass-gap theorem.
 
 ## Frontier not yet consumable
 
