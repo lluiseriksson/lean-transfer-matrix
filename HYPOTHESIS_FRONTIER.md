@@ -76,8 +76,9 @@ first principles):
   `pairWeight_product_eq_transferMatrix_entry_product`,
   `gibbsPartition_eq_transferMatrix_entry_sum`,
   `trace_isingTransferMatrix_pow`,
-  `trace_isingTransferMatrix_pow_succ_eq_entry_sum`, `pairWeight_self`,
-  `pairWeight_of_ne`, `pairWeight_comm`, and `spinValue_mul_self`.
+  `trace_isingTransferMatrix_pow_succ_eq_entry_sum`,
+  `gibbsPartition_zero_eq_trace`, `pairWeight_self`, `pairWeight_of_ne`,
+  `pairWeight_comm`, and `spinValue_mul_self`.
 
 ## Honest distance to the programme target
 

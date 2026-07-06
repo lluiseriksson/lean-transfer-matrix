@@ -153,6 +153,19 @@ theorem trace_isingTransferMatrix_pow_succ_eq_entry_sum (β : ℝ) (n : ℕ) :
             * (isingTransferMatrix β).entry t s := by
   exact Matrix2.trace_pow_succ_eq_entry_sum (isingTransferMatrix β) n
 
+/-- Base case of the partition-to-trace bridge.  The one-site periodic chain
+has one self-edge, so its partition function is the trace of `T`. -/
+theorem gibbsPartition_zero_eq_trace (β : ℝ) :
+    gibbsPartition β 0 = ((isingTransferMatrix β).pow 1).trace := by
+  have hcardNat : Fintype.card Spin = 2 := by
+    native_decide
+  have hcard : (Fintype.card Spin : ℝ) = 2 := by
+    norm_num [hcardNat]
+  simp [gibbsPartition, pairWeight, Matrix2.pow, Matrix2.one, Matrix2.mul,
+    Matrix2.trace, isingTransferMatrix, transferMatrix, alignedWeight]
+  rw [hcard]
+  ring
+
 /-- The configuration sum equals the transfer-matrix trace:
 `Z_{n+1} = tr (T^{n+1}) = λ₊^{n+1} + λ₋^{n+1}`. -/
 theorem gibbsPartition_eq_trace (β : ℝ) (n : ℕ) :
