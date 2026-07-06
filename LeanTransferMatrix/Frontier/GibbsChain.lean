@@ -153,6 +153,18 @@ theorem trace_isingTransferMatrix_pow_succ_eq_entry_sum (β : ℝ) (n : ℕ) :
             * (isingTransferMatrix β).entry t s := by
   exact Matrix2.trace_pow_succ_eq_entry_sum (isingTransferMatrix β) n
 
+/-- Reduction wrapper for the remaining combinatorial bridge: once the
+transfer-entry configuration sum is identified with the matrix trace, the
+first-principles Gibbs partition theorem follows immediately. -/
+theorem gibbsPartition_eq_trace_of_entry_sum_eq_trace (β : ℝ) (n : ℕ)
+    (htrace :
+      (∑ σ : Fin (n + 1) → Spin,
+          ∏ i : Fin (n + 1),
+            (isingTransferMatrix β).entry (σ i) (σ (i + 1)))
+        = ((isingTransferMatrix β).pow (n + 1)).trace) :
+    gibbsPartition β n = ((isingTransferMatrix β).pow (n + 1)).trace := by
+  rw [gibbsPartition_eq_transferMatrix_entry_sum, htrace]
+
 /-- Base case of the partition-to-trace bridge.  The one-site periodic chain
 has one self-edge, so its partition function is the trace of `T`. -/
 theorem gibbsPartition_zero_eq_trace (β : ℝ) :
