@@ -1,6 +1,6 @@
 # Status
 
-Last refreshed: 2026-07-06T13:53Z.
+Last refreshed: 2026-07-06T14:55Z.
 
 This file is an operational heartbeat for `THE-ERIKSSON-PROGRAMME`
 consumers. It adds no Lean declarations and makes no new mathematical claim.
@@ -9,16 +9,16 @@ consumers. It adds no Lean declarations and makes no new mathematical claim.
 
 Default branch: `main`
 
-Checked head: `6290f59a716914fa57651490755f4f99abe3bf50`
+Checked head: `1552ed5e14870f928f7fea724bf9f4d615aef545`
 
 Latest checked runs on that head:
 
 * `CI`: success, run
-  `28789930918`
-  (`https://github.com/lluiseriksson/lean-transfer-matrix/actions/runs/28789930918`).
+  `28797268266`
+  (`https://github.com/lluiseriksson/lean-transfer-matrix/actions/runs/28797268266`).
 * `heartbeat`: success, run
-  `28793313215`
-  (`https://github.com/lluiseriksson/lean-transfer-matrix/actions/runs/28793313215`).
+  `28797268242`
+  (`https://github.com/lluiseriksson/lean-transfer-matrix/actions/runs/28797268242`).
 
 The stable parent-facing import remains:
 
