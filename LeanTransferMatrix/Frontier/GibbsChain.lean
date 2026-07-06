@@ -178,6 +178,33 @@ theorem gibbsPartition_zero_eq_trace (β : ℝ) :
   rw [hcard]
   ring
 
+/-- Two-site oracle for the partition-to-trace bridge. This checks the first
+nontrivial periodic case before the general finite path expansion is closed. -/
+theorem gibbsPartition_one_eq_trace (β : ℝ) :
+    gibbsPartition β 1 = ((isingTransferMatrix β).pow 2).trace := by
+  rw [gibbsPartition_eq_transferMatrix_entry_sum]
+  change
+    (∑ σ : Fin 2 → Spin,
+        ∏ i : Fin 2,
+          (isingTransferMatrix β).entry (σ i) (σ (i + 1)))
+      = ((isingTransferMatrix β).pow 2).trace
+  simp_rw [Fin.prod_univ_two]
+  change
+    (∑ σ : Fin 2 → Spin,
+        (isingTransferMatrix β).entry ((finTwoArrowEquiv Spin) σ).1
+            ((finTwoArrowEquiv Spin) σ).2
+          * (isingTransferMatrix β).entry ((finTwoArrowEquiv Spin) σ).2
+            ((finTwoArrowEquiv Spin) σ).1)
+      = ((isingTransferMatrix β).pow 2).trace
+  rw [(finTwoArrowEquiv Spin).sum_comp
+    (fun p : Spin × Spin =>
+      (isingTransferMatrix β).entry p.1 p.2
+        * (isingTransferMatrix β).entry p.2 p.1)]
+  rw [Fintype.sum_prod_type]
+  simp [Spin.univ_eq, Matrix2.pow, Matrix2.one, Matrix2.mul, Matrix2.trace,
+    Matrix2.entry, isingTransferMatrix, transferMatrix, alignedWeight,
+    antiAlignedWeight]
+
 /-- The configuration sum equals the transfer-matrix trace:
 `Z_{n+1} = tr (T^{n+1}) = λ₊^{n+1} + λ₋^{n+1}`. -/
 theorem gibbsPartition_eq_trace (β : ℝ) (n : ℕ) :
