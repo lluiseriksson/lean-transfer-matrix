@@ -1,6 +1,6 @@
 # Status
 
-Last refreshed: 2026-07-04.
+Last refreshed: 2026-07-06.
 
 This file is an operational heartbeat for `THE-ERIKSSON-PROGRAMME`
 consumers. It adds no Lean declarations and makes no new mathematical claim.
@@ -9,16 +9,17 @@ consumers. It adds no Lean declarations and makes no new mathematical claim.
 
 Default branch: `main`
 
-Checked head: `b06b17b77bc91e07765c87b1fe754422154e2684`
+Checked head: `d2eaa2e36462d72c9835fbe87b32a923276987d2`
 
 Latest checked runs on that head:
 
-* CI: success, run
-  `28698216414`
-  (`https://github.com/lluiseriksson/lean-transfer-matrix/actions/runs/28698216414`).
 * heartbeat: success, run
-  `28698853782`
-  (`https://github.com/lluiseriksson/lean-transfer-matrix/actions/runs/28698853782`).
+  `28768270113`
+  (`https://github.com/lluiseriksson/lean-transfer-matrix/actions/runs/28768270113`).
+
+No standalone `CI` workflow run was found on this exact head during this
+refresh. The heartbeat workflow includes the main-branch build/sorry/axiom
+check and was green.
 
 The stable parent-facing import remains:
 
@@ -51,13 +52,15 @@ shapes.
 
 Open frontier PR:
 
-* `#5` (`frontier: Gibbs chain local weight lemmas`) targets
+* `#8` (`[codex] link Gibbs weights to transfer entries`) targets
   `frontier/M1`, not `main`.
 
-Open agent task:
+Open agent tasks:
 
 * `#4` (`M1: cerrar gibbsPartition_eq_trace`) tracks the next frontier
   proof target.
+* `#9` (`Formalize 2602.0032 finite-window extraction guardrail`) tracks a
+  mother-facing finite-window extraction guardrail interface or contract note.
 
 No open `blocked` or `interface-change` issue was found during this refresh.
 
