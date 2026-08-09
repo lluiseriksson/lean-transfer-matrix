@@ -7,6 +7,10 @@ This repo formalizes a small, honest transfer-matrix dictionary:
 * lattice measure / finite model data -> transfer operator data;
 * transfer spectral gap -> exponential two-point clustering;
 * exponential clustering -> lower bound on transfer gap, when the finite transfer reconstruction hypothesis is supplied.
+* finite-noise blindness: a normalized moment window can be contaminated by an
+  atom at transfer eigenvalue `1` while every recorded moment moves by at most
+  the atom's weight; the construction and its zero-mass consequence are
+  machine-checked in `FiniteNoiseBlindness.lean`.
 
 ## Scope disclaimer
 
@@ -33,4 +37,5 @@ The toolchain and Mathlib lock are copied from `github.com/lluiseriksson/THE-ERI
 ```bash
 lake exe cache get
 lake build
+lake env lean audit/FiniteNoiseBlindnessAxioms.lean
 ```
