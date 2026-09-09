@@ -1,0 +1,100 @@
+{
+  "schema_version": "1.0",
+  "reviewed_on": "2026-09-09",
+  "window": {
+    "start": "2026-09-03",
+    "end": "2026-09-09",
+    "calendar_week_start": "2026-09-07"
+  },
+  "coverage": "targeted, non-exhaustive",
+  "repository_card": {
+    "repository": "lluiseriksson/lean-transfer-matrix",
+    "source_ids": [
+      "2609.01605",
+      "2609.04117"
+    ],
+    "local_anchors": [
+      "README.md",
+      "HYPOTHESIS_FRONTIER.md",
+      "INTERFACES.md"
+    ],
+    "frontier": "M0 Ising diagonalization is recorded; the forward/reverse finite transfer interfaces retain reconstruction and spectral inputs.",
+    "bridge_hypothesis": "Compare gaps only after naming their operators. Dictionary: normalized transfer eigenvalue ratio -> discrete correlation decay; channel subleading eigenvalue -> mixing rate. A Lindbladian can be nonnormal and the reverse correlation-to-gap implication needs observable visibility.",
+    "next_finite_task": "For a small transfer matrix and a small primitive channel, compute the full spectrum and an observable overlap table. Add a deliberately invisible slow mode as a negative control for the reverse interface.",
+    "falsifier": "Abandon a reverse-gap inference if the observable is orthogonal to the slow mode, or if a Liouvillian decay rate is substituted for a Hamiltonian energy gap.",
+    "related_repositories": [
+      "lean-os-positivity",
+      "finite-sample-spectral-certificates"
+    ],
+    "proposal_status": "speculative; not executed or formally verified",
+    "eliminated_hypotheses": [],
+    "inspected_commit": "4e2366a4737f800ee03634a7f80b74fa2870781a"
+  },
+  "sources": [
+    {
+      "id": "arxiv:2609.01605",
+      "arxiv_id": "2609.01605",
+      "title": "Depth-1 expanders on the unitary group and applications",
+      "authors": [
+        "Anshu, Anurag",
+        "Balasubramanian, Shankar",
+        "Haferkamp, Jonas",
+        "Harrow, Aram W.",
+        "Tan, Xinyu"
+      ],
+      "first_submitted": "2026-09-01",
+      "latest_revision": "2026-09-01",
+      "reviewed_version": "v1",
+      "url": "https://arxiv.org/abs/2609.01605v1",
+      "doi": "10.48550/arXiv.2609.01605",
+      "verified_on": "2026-09-09",
+      "recency": "background",
+      "publication_status": "preprint; peer-review status not established in this sweep",
+      "evidence_level": "literature",
+      "review_depth": "Abstract and submission history",
+      "source_claim": "Anshu and collaborators construct constant-degree, constant-gap quantum expanders with depth-one local circuit realizations and apply them to one-dimensional Hamiltonians with an entanglement-gap relation.",
+      "limits": "An expander gap, a transfer gap and a many-body Hamiltonian gap are different operators. Track dimension, locality and the definition of gap before translating. First posted 1 September.",
+      "tags": [
+        "spectral-gap",
+        "quantum-information",
+        "locality"
+      ],
+      "abstract_page_sha256": "a4375a297a32c261481633f61ce35da65429fedec138e6d5cf00e6312051d8db",
+      "reviewed_full_text_sha256": null,
+      "reuse": "Bibliographic metadata and original synthesis only; no permission to train on linked full text is inferred."
+    },
+    {
+      "id": "arxiv:2609.04117",
+      "arxiv_id": "2609.04117",
+      "title": "Non-Abelian string melting and thermalization in an open lattice gauge theory",
+      "authors": [
+        "Verde, Erick Parra",
+        "Cataldi, Giovanni",
+        "Kühn, Stefan",
+        "Magnifico, Giuseppe",
+        "Halimeh, Jad C."
+      ],
+      "first_submitted": "2026-09-03",
+      "latest_revision": "2026-09-03",
+      "reviewed_version": "v1",
+      "url": "https://arxiv.org/abs/2609.04117v1",
+      "doi": "10.48550/arXiv.2609.04117",
+      "verified_on": "2026-09-09",
+      "recency": "new-in-trailing-week",
+      "publication_status": "preprint; peer-review status not established in this sweep",
+      "evidence_level": "literature",
+      "review_depth": "v1: model, thermalization discussion and strong-dephasing reduction",
+      "source_claim": "A tensor-network study couples 1+1D SU(2) gauge theory with matter to a gauge-preserving Lindblad bath. It finds nonmonotonic relaxation and derives an exclusion-process description in a strong-dephasing limit.",
+      "limits": "This is an open-system finite/truncated lattice setting, not pure 4D Euclidean Yang-Mills. A Liouvillian relaxation rate is not automatically a Hamiltonian gap, and the strong-dephasing expansion has its own regime.",
+      "tags": [
+        "yang-mills",
+        "lindblad",
+        "zeno",
+        "tensor-networks"
+      ],
+      "abstract_page_sha256": "5bd8e4f32445c083e75584d29d5ef41d78ed422d5c848b77e706f123fb496a82",
+      "reviewed_full_text_sha256": "7eec747973d16173df4cf1775f12720a3e7ba56b4fcdf158063e15d681b8fa00",
+      "reuse": "Bibliographic metadata and original synthesis only; no permission to train on linked full text is inferred."
+    }
+  ]
+}
